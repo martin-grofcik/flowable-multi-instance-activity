@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="processEngineConfiguration"
+		class="org.flowable.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration">
+		<property name="asyncExecutorActivate" value="true" />
+		<property name="asyncExecutorNumberOfRetries" value="0" />
+		<property name="asyncExecutorCorePoolSize" value="8" />
+		<property name="asyncExecutorMaxPoolSize" value="32" />
+		<property name="jdbcUrl"
+			value="jdbc:h2:mem:flowable;MVCC=TRUE" />
+		<property name="jdbcDriver" value="org.h2.Driver" />
+		<property name="jdbcUsername" value="sa" />
+		<property name="jdbcPassword" value="" />
+
+		<property name="asyncExecutor" ref="asyncExecutor" />
+	</bean>
+
+	<bean id="asyncExecutor"
+		class="org.flowable.job.service.impl.asyncexecutor.DefaultAsyncJobExecutor">
+		<property name="defaultAsyncJobAcquireWaitTimeInMillis"
+			value="1000" />
+		<property name="defaultTimerJobAcquireWaitTimeInMillis"
+			value="1000" />
+		<property name="corePoolSize" value="8"></property>
+		<property name="maxPoolSize" value="32"></property>
+	</bean>
+</beans>
