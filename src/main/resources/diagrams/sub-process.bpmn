@@ -3,7 +3,10 @@
   <process id="subProcess" name="subProcess" isExecutable="true">
     <startEvent id="startEvent1"></startEvent>
     <endEvent id="sid-A3989074-F58B-4088-BE1A-49869B031D69"></endEvent>
-    <serviceTask id="stepUpdate" name="stepUpdate" flowable:async="true" flowable:class="parallel.flowable.test.DisplayMessageAndUpdate"></serviceTask>
+    <serviceTask id="stepUpdate" name="stepUpdate" flowable:async="true" flowable:class="parallel.flowable.test.DisplayMessageAndUpdate">
+          <multiInstanceLoopCharacteristics isSequential="false" flowable:collection="messages" flowable:elementVariable="message">
+          </multiInstanceLoopCharacteristics>
+    </serviceTask>
     <sequenceFlow id="sid-F2780EF8-BF63-43E6-875F-FFD8F7884B66" sourceRef="startEvent1" targetRef="stepUpdate"></sequenceFlow>
     <sequenceFlow id="sid-15B07519-8103-4A87-B888-06166E82D371" sourceRef="stepUpdate" targetRef="sid-A3989074-F58B-4088-BE1A-49869B031D69"></sequenceFlow>
   </process>

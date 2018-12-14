@@ -4,9 +4,11 @@
     <startEvent id="startEvent1"></startEvent>
     <serviceTask id="task1" name="task 1" flowable:async="true" flowable:class="parallel.flowable.test.SetMessageTask"></serviceTask>
     <endEvent id="sid-A3712D0A-C601-48B0-B7A8-98E76F0F6BDE"></endEvent>
-    <callActivity id="task2" name="sub" flowable:async="true" calledElement="subProcess" flowable:calledElementType="key" flowable:completeAsync="true" flowable:inheritVariables="true">
-      <multiInstanceLoopCharacteristics isSequential="false" flowable:collection="messages" flowable:elementVariable="message">
-      </multiInstanceLoopCharacteristics>
+    <callActivity id="task2" name="sub" flowable:async="true" calledElement="subProcess" flowable:calledElementType="key" flowable:completeAsync="true">
+            <extensionElements>
+              <flowable:in source="messages" target="messages"></flowable:in>
+              <flowable:out source="messages" target="messages"></flowable:out>
+            </extensionElements>
     </callActivity>
     <sequenceFlow id="sid-EF20AD70-6619-44C1-94F3-97C23A25B6FD" sourceRef="startEvent1" targetRef="task1"></sequenceFlow>
     <sequenceFlow id="sid-132893E5-DA76-4224-ACFC-3E49D552B729" sourceRef="task1" targetRef="task2"></sequenceFlow>

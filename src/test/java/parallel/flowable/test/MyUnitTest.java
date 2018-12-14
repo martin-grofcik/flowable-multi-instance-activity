@@ -36,7 +36,7 @@ public class MyUnitTest {
 		ProcessInstance procInst = flowableRule.getRuntimeService().startProcessInstanceByKey("mainProcess");
 		ProcessInstance processInstanceRunning = flowableRule.getRuntimeService().createProcessInstanceQuery()
 				.processInstanceId(procInst.getProcessInstanceId()).singleResult();
-		while (!processInstanceRunning.isEnded()) {
+		while (processInstanceRunning != null && !processInstanceRunning.isEnded()) {
 			Thread.sleep(2000);
 			processInstanceRunning = flowableRule.getRuntimeService().createProcessInstanceQuery()
 					.processInstanceId(procInst.getProcessInstanceId()).singleResult();
